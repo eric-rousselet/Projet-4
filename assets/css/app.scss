@@ -1,5 +1,41 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Timmana');
+
+$globalBackgroundColor:#f2f3f5;
+$navBackgroundColor:#1c2129;
+$buttonBackgroundColor:#fecc00;
+$containerBackgroundColor:white;
+$containerShadowColor:grey;
+
+$textsFont:'Open Sans', Arial, sans-serif;
+$titlesFont:'Timmana', Arial, sans-serif;
+
+.navbar {
+    background-color: $navBackgroundColor;
+}
+
+.container {
+    background-color: $containerBackgroundColor;
+    box-shadow: 0px 5px 10px 2px $containerShadowColor;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    padding: 3em 3em 3em 3em;
+}
 
 body {
-    background-color: lightgray;
+    background-color: $globalBackgroundColor;
+    font-family:$textsFont;
+}
+
+h1, h2 {
+    margin:15px;
+    font-family:$titlesFont;
+}
+
+.customButton {
+    background-color:$buttonBackgroundColor;
+    &:hover {
+        background-color:lighten($buttonBackgroundColor, 20%);
+    }
 }

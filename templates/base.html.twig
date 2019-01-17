@@ -11,7 +11,9 @@
         <header>
             {% include '_navbar.html.twig' %}
         </header>
-        {% block body %}{% endblock %}
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
