@@ -1,0 +1,74 @@
+<?php
+
+namespace App\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
+ */
+class Comment
+{
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=500)
+     */
+    private $nickname;
+
+    /**
+     * @ORM\Column(type="string", length=10000)
+     */
+    private $message;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Movie", inversedBy="comments")
+     */
+    private $movie;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNickname(): ?string
+    {
+        return $this->nickname;
+    }
+
+    public function setNickname(string $nickname): self
+    {
+        $this->nickname = $nickname;
+
+        return $this;
+    }
+
+    public function getMessage(): ?string
+    {
+        return $this->message;
+    }
+
+    public function setMessage(string $message): self
+    {
+        $this->message = $message;
+
+        return $this;
+    }
+
+    public function getMovie(): ?Movie
+    {
+        return $this->movie;
+    }
+
+    public function setMovie(?Movie $movie): self
+    {
+        $this->movie = $movie;
+
+        return $this;
+    }
+}
