@@ -26,7 +26,7 @@ class ActorController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="actor_new", methods={"GET","POST"})
+     * @Route("/admin/new", name="actor_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
