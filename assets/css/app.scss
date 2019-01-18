@@ -15,6 +15,11 @@ $titlesFont:'Timmana', Arial, sans-serif;
     background-color: $navBackgroundColor;
 }
 
+.footer {
+    background-color: $navBackgroundColor;
+    padding:40px;
+}
+
 .container {
     background-color: $containerBackgroundColor;
     box-shadow: 0px 5px 10px 2px $containerShadowColor;
