@@ -16,6 +16,9 @@ class ActorType extends AbstractType
             ->add('name')
             ->add('birth')
             ->add('bio')
+            ->add('movies', CollectionType::class, [
+                'entry_type' => MovieType::class,
+            ]);
         ;
     }
 

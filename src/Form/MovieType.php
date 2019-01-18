@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Movie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -17,6 +18,9 @@ class MovieType extends AbstractType
             ->add('picture')
             ->add('release_date')
             ->add('director')
+            ->add('actors', CollectionType::class, [
+                'entry_type' => ActorType::class,
+            ]);
         ;
     }
 
