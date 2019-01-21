@@ -39,12 +39,12 @@ class Movie
     private $release_date;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=500, nullable=true)
      */
     private $director;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Actor", mappedBy="movies")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Actor", mappedBy="movies", cascade="all", orphanRemoval=true)
      */
     private $actors;
 
@@ -62,6 +62,11 @@ class Movie
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="movie")
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $api_id;
 
     public function __construct()
     {
@@ -250,6 +255,18 @@ class Movie
                 $comment->setMovie(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getApiId(): ?int
+    {
+        return $this->api_id;
+    }
+
+    public function setApiId(?int $api_id): self
+    {
+        $this->api_id = $api_id;
 
         return $this;
     }

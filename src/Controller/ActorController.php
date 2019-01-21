@@ -93,4 +93,23 @@ class ActorController extends AbstractController
 
         return $this->redirectToRoute('actor_index');
     }
+
+    /**
+     * @Route("/admin/import", name="import_actors", methods={"GET"})
+     */
+    public function importActors()
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $request = new \GuzzleHttp\Psr7\Request('GET', 'https://api.themoviedb.org/3/person/popular?api_key=b5bc52293943361515af8c82862fe832&page=25');
+        $promise = $client->sendAsync($request)->then(function ($response) {
+            $body = $response->getBody();
+            $body = json_decode($body, true, 10);
+            var_dump($body);
+        });
+
+        $promise->wait();
+
+        die();
+    }
 }

@@ -34,7 +34,7 @@ class Actor
     private $bio;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Movie", inversedBy="actors")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Movie", inversedBy="actors", cascade="all", orphanRemoval=true)
      */
     private $movies;
 
