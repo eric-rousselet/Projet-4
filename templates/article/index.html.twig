@@ -3,27 +3,19 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <h1>Article index</h1>
-
+    <h1>Articles</h1>
+    {% if is_granted('ROLE_ADMIN') %}<a class="nav-link mb-3" href="{{ path('article_new') }}"><button class="btn customButton  my-2 my-sm-0">Create a new article</button></a>{% endif %}
     <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Content</th>
-                <th>actions</th>
-            </tr>
-        </thead>
         <tbody>
         {% for article in articles %}
             <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.title }}</td>
-                <td>{{ article.content }}</td>
+                <td><a href="{{ path('article_show', {'id': article.id}) }}">{{ article.title }}</a></td>
+                <td><p class="previewArticle">{{ article.content }}</p></td>
+                {% if is_granted('ROLE_ADMIN') %}
                 <td>
-                    <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                    <a class="nav-link" href="{{ path('article_edit', {'id': article.id}) }}"><button class="btn customButton  my-2 my-sm-0">Edit</button></a>
                 </td>
+                {% endif %}
             </tr>
         {% else %}
             <tr>
@@ -32,6 +24,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('article_new') }}">Create new</a>
 {% endblock %}

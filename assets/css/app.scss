@@ -8,6 +8,7 @@ $buttonBackgroundColor:#fecc00;
 $containerBackgroundColor:white;
 $containerShadowColor:grey;
 $colorFooterFont:white;
+$linksColor:black;
 
 $textsFont:'Open Sans', Arial, sans-serif;
 $titlesFont:'Timmana', Arial, sans-serif;
@@ -39,9 +40,23 @@ body {
     font-family:$textsFont;
 }
 
-h1, h2 {
+h1 {
+    text-align:center;
+    margin:50px;
+    font-family:$titlesFont;
+}
+
+h2 {
     margin:15px;
     font-family:$titlesFont;
+}
+
+a {
+    font-weight:bold;
+    color:$linksColor;
+    &:hover {
+        color:$linksColor;
+    }
 }
 
 .customButton {
@@ -49,4 +64,9 @@ h1, h2 {
     &:hover {
         background-color:lighten($buttonBackgroundColor, 20%);
     }
+}
+
+.previewArticle {
+    height:70px;
+    overflow:hidden;
 }
