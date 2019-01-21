@@ -15,6 +15,9 @@
                 <td>
                     <a class="nav-link" href="{{ path('article_edit', {'id': article.id}) }}"><button class="btn customButton  my-2 my-sm-0">Edit</button></a>
                 </td>
+                <td>
+                    {{ include('article/_delete_form.html.twig') }}
+                </td>
                 {% endif %}
             </tr>
         {% else %}

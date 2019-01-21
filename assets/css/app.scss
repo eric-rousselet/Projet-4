@@ -59,6 +59,20 @@ a {
     }
 }
 
+.formTextarea {
+    width:100%;
+    height:200px;
+}
+
+.formInput {
+    width:100%;
+}
+
+.form {
+    width:70%;
+    margin:auto;
+}
+
 .customButton {
     background-color:$buttonBackgroundColor;
     &:hover {

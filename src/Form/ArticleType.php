@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,7 +14,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content')
+            ->add('content', TextareaType::class)
         ;
     }
 

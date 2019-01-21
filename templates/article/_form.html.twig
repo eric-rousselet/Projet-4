@@ -1,4 +1,11 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, { 'attr': {'class': 'form'} }) }}
+    {{ form_label(form.title, 'Title : ') }}
+    <br>
+    {{ form_widget(form.title, { 'attr': {'class': 'formInput'} }) }}
+    <br>
+    {{ form_label(form.content, 'Content : ') }}
+    <br>
+    {{ form_widget(form.content, { 'attr': {'class': 'formTextarea'} }) }}
+    <br>
+    <button class="btn customButton  my-2 my-sm-2">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
