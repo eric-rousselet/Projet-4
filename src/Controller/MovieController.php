@@ -147,9 +147,7 @@ class MovieController extends AbstractController
                 return $body['poster_path'];
             });
             $promise->wait();
-            var_dump($promise);
-            die();
-            $movie->setPicture($promise['result']);
+            $movie->setPicture($body['poster_path']);
             $this->getDoctrine()->getManager()->persist($movie);
             $this->getDoctrine()->getManager()->flush();
         }

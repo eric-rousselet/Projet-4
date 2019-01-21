@@ -1,0 +1,15 @@
+{{ form_start(form, { 'attr': {'class': 'form'} }) }}
+{{ form_label(form.email, 'Email : ') }}
+<br>
+{{ form_widget(form.email, { 'attr': {'class': 'formInput'} }) }}
+<br>
+{{ form_label(form.object, 'Object : ') }}
+<br>
+{{ form_widget(form.object, { 'attr': {'class': 'formInput'} }) }}
+<br>
+{{ form_label(form.emailText, 'Message : ') }}
+<br>
+{{ form_widget(form.emailText, { 'attr': {'class': 'formTextarea'} }) }}
+<br>
+<button class="btn customButton  my-2 my-sm-2">{{ button_label|default('Send') }}</button>
+{{ form_end(form) }}
