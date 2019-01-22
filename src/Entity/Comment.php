@@ -17,11 +17,6 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=500)
-     */
-    private $nickname;
-
-    /**
      * @ORM\Column(type="string", length=10000)
      */
     private $message;
@@ -40,18 +35,6 @@ class Comment
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNickname(): ?string
-    {
-        return $this->nickname;
-    }
-
-    public function setNickname(string $nickname): self
-    {
-        $this->nickname = $nickname;
-
-        return $this;
     }
 
     public function getMessage(): ?string

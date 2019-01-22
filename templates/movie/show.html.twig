@@ -48,4 +48,15 @@
     <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
 
     {{ include('movie/_delete_form.html.twig') }}
+
+    <br>
+    {{ form_start(form, { 'attr': {'class': 'form'} }) }}
+    <br>
+    {{ form_label(form.message, 'Add your comment : ') }}
+    <br>
+    {{ form_widget(form.message, { 'attr': {'class': 'formTextarea'} }) }}
+    <br>
+    <button class="btn customButton  my-2 my-sm-2">{{ button_label|default('Send') }}</button>
+    {{ form_end(form) }}
+
 {% endblock %}
