@@ -7,6 +7,7 @@ use App\Entity\Movie;
 use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\MovieType;
+use App\Repository\CommentRepository;
 use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,19 +75,24 @@ class MovieController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $this->security->getUser();
-            $id=$user->getId();
             $comment->setUserId($user);
             $comment->setMovie($movie);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($comment);
             $entityManager->flush();
-
+            $this->addFlash(
+                'success',
+                "Your comment has been registered !"
+            );
             return $this->redirectToRoute('movie_show', ['id'=>$movie->getId()]);
         }
+
+        $comments=$movie->getComments();
 
         return $this->render('movie/show.html.twig', [
             'movie' => $movie,
             'form' => $form->createView(),
+            'comments' => $comments,
         ]);
     }
 
