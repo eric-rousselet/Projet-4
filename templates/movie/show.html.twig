@@ -4,51 +4,49 @@
 
 {% block body %}
     <h1>Movie</h1>
-    <p>
-        Rate this movie :
-        <div class="stars">
-            <a href=""><i class="fas fa-star star1 star"></i></a>
-            <a href=""><i class="fas fa-star star2 star"></i></a>
-            <a href=""><i class="fas fa-star star3 star"></i></a>
-            <a href=""><i class="fas fa-star star4 star"></i></a>
-            <a href=""><i class="fas fa-star star5 star"></i></a>
-        </div>
-    </p>
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ movie.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ movie.title }}</td>
-            </tr>
-            <tr>
-                <th>Synopsis</th>
-                <td>{{ movie.synopsis }}</td>
-            </tr>
-            <tr>
-                <th>Picture</th>
-                <td>{{ movie.picture }}</td>
-            </tr>
-            <tr>
-                <th>Release_date</th>
-                <td>{{ movie.releaseDate }}</td>
-            </tr>
-            <tr>
-                <th>Director</th>
-                <td>{{ movie.director }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('movie_index') }}">back to list</a>
-
-    <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
-
-    {{ include('movie/_delete_form.html.twig') }}
-
+        <p>
+            Rate this movie :
+            <div class="stars">
+                <a href=""><i class="fas fa-star star1 star"></i></a>
+                <a href=""><i class="fas fa-star star2 star"></i></a>
+                <a href=""><i class="fas fa-star star3 star"></i></a>
+                <a href=""><i class="fas fa-star star4 star"></i></a>
+                <a href=""><i class="fas fa-star star5 star"></i></a>
+            </div>
+        </p>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ movie.id }}</td>
+                </tr>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ movie.title }}</td>
+                </tr>
+                <tr>
+                    <th>Synopsis</th>
+                    <td>{{ movie.synopsis }}</td>
+                </tr>
+                <tr>
+                    <th>Picture</th>
+                    <td>{{ movie.picture }}</td>
+                </tr>
+                <tr>
+                    <th>Release_date</th>
+                    <td>{{ movie.releaseDate }}</td>
+                </tr>
+                <tr>
+                    <th>Director</th>
+                    <td>{{ movie.director }}</td>
+                </tr>
+            </tbody>
+        </table>
+    <div class="input-group">
+        <a href="{{ path('movie_edit', {'id': movie.id}) }}"><button class="btn customButton  my-2 my-sm-2 m-2">Edit</button></a>
+        {{ include('movie/_delete_form.html.twig') }}
+    </div>
+    <br>
     {{ form_start(form, { 'attr': {'class': 'form'} }) }}
     <br>
     {{ form_label(form.message, 'Add your comment : ') }}
