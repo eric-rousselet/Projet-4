@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register!{% endblock %}
+
+{% block body %}
+    <h1>Register</h1>
+    {{ form_start(form, { 'attr': {'class': 'form'} }) }}
+    {{ form_label(form.username, 'Username : ') }}
+    <br>
+    {{ form_widget(form.username, { 'attr': {'class': 'formInput'} }) }}
+    <br>
+    {{ form_label(form.password, 'Password : ') }}
+    <br>
+    {{ form_widget(form.password, { 'attr': {'class': 'formInput'} }) }}
+    <br>
+    <button class="btn customButton  my-2 my-sm-2" type="submit">
+        Create account
+     </button>
+    {{ form_end(form) }}
+{% endblock %}
