@@ -48,6 +48,13 @@ class SecurityController extends AbstractController
             $user->setRoles(self::DEFAULT_ROLE);
             $em->persist($user);
             $em->flush();
+
+            $this->addFlash(
+                'success',
+                "Votre compte a été créé ! Veuillez vous connecter."
+            );
+
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('security/register.html.twig', ['form'=>$form->createView()]);
