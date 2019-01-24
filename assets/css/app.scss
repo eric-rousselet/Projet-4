@@ -102,11 +102,16 @@ a {
 }
 .star {
     color:$inactiveStarsColor;
-    .star:hover {
-        color:$activeStarsColor;
-    }
 }
 
 .activeStar {
     color:$activeStarsColor;
+}
+
+.star1, .star2, .star3, .star4, .star5 {
+  color:$activeStarsColor;
+}
+
+.star4:hover ~ a .star5, .star3:hover ~ a .star4,  .star3:hover ~ a .star5, .star2:hover ~ a .star3, .star2:hover ~ a .star4, .star2:hover ~ a .star5, .star1:hover ~ a .star2,.star1:hover ~ a .star3, .star1:hover ~ a .star4, .star1:hover ~ a .star5 {
+  color:$inactiveStarsColor;
 }
