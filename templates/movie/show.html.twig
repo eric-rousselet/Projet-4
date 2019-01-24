@@ -60,5 +60,10 @@
                 <p>{{ comment.message }}</p>
             </fieldset>
         {% endfor %}
+        {% if comments is empty %}
+            <p>
+                No comments.
+            </p>
+        {% endif %}
     </div>
 {% endblock %}
