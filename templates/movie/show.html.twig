@@ -35,11 +35,11 @@
     <div class="row form mt-5">
          <b>Rate this movie</b> :
          <div class="stars">
-             <a href="{{ path('movie_new_rate', {'value': 1, 'id': movie.id}) }}"><i class="fas fa-star star"></i></a>
-             <a href="{{ path('movie_new_rate', {'value': 2, 'id': movie.id}) }}"><i class="fas fa-star star"></i></a>
-             <a href="{{ path('movie_new_rate', {'value': 3, 'id': movie.id}) }}"><i class="fas fa-star star"></i></a>
-             <a href="{{ path('movie_new_rate', {'value': 4, 'id': movie.id}) }}"><i class="fas fa-star star"></i></a>
-             <a href="{{ path('movie_new_rate', {'value': 5, 'id': movie.id}) }}"><i class="fas fa-star star"></i></a>
+             <a href="{{ path('movie_new_rate', {'value': 1, 'id': movie.id}) }}" class="star"><i class="fas fa-star star"></i></a>
+             <a href="{{ path('movie_new_rate', {'value': 2, 'id': movie.id}) }}" class="star"><i class="fas fa-star star"></i></a>
+             <a href="{{ path('movie_new_rate', {'value': 3, 'id': movie.id}) }}" class="star"><i class="fas fa-star star"></i></a>
+             <a href="{{ path('movie_new_rate', {'value': 4, 'id': movie.id}) }}" class="star"><i class="fas fa-star star"></i></a>
+             <a href="{{ path('movie_new_rate', {'value': 5, 'id': movie.id}) }}" class="star"><i class="fas fa-star star"></i></a>
          </div>
     </div>
     {{ form_start(form, { 'attr': {'class': 'form'} }) }}

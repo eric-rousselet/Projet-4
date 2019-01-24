@@ -13,6 +13,7 @@ use App\Repository\MovieRepository;
 use App\Repository\RatingRepository;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -226,6 +227,10 @@ class MovieController extends AbstractController
     {
         $rating=new Rating();
         $user = $this->security->getUser();
+
+        if ($value<=0 || $value>5) {
+            throw new Exception('Incorrect value.');
+        }
 
         $checkRating=$ratingRepository->findBy(['movie'=>$movie->getId(), 'user_id'=>$user->getId()]);
         if (empty($checkRating)) {
