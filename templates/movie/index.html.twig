@@ -5,30 +5,17 @@
 {% block body %}
     <h1>Movie index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Synopsis</th>
-                <th>Picture</th>
-                <th>Release_date</th>
-                <th>Director</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row">
         {% for movie in movies %}
-            <tr>
-                <td><a href="{{ path('movie_show', {'id': movie.id}) }}">{{ movie.title }}</a></td>
-                <td>{{ movie.synopsis }}</td>
-                <td>{{ movie.picture }}</td>
-                <td>{{ movie.releaseDate }}</td>
-                <td>{{ movie.director }}</td>
-            </tr>
+            <div class="col-2 form m-0 thumbs">
+                <a href="{{ path('movie_show', {'id': movie.id}) }}"><img src="{{ movie.picture }}" height="150" width="100" /></a>
+                <p><a href="{{ path('movie_show', {'id': movie.id}) }}">{{ movie.title }}</a></p>
+            </div>
         {% else %}
             <tr>
-                <td colspan="7">No records found.</td>
+                <td colspan="7">No movie found.</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 {% endblock %}
+
