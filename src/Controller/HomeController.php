@@ -33,10 +33,11 @@ class HomeController extends AbstractController
         $topRated=array_slice($ratings, 0, 9, true);
         $topRated=array_keys($topRated);
         $topRatedMovies=[];
+        $topRatedId=[];
         foreach ($topRated as $id) {
             $topRatedMovies[]=$movieRepository->findOneBy(['id'=>$id])->getPicture();
+            $topRatedId[]=$id;
         }
-
-        return $this->render('home/home.html.twig', ['topRated'=>$topRatedMovies]);
+        return $this->render('home/home.html.twig', ['topRated'=>$topRatedMovies, 'topRatedId'=>$topRatedId]);
     }
 }
