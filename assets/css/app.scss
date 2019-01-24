@@ -11,6 +11,7 @@ $colorFooterFont:white;
 $linksColor:black;
 $activeStarsColor:#fecc00;
 $inactiveStarsColor:#1c2129;
+$carouselColor:black;
 
 $textsFont:'Open Sans', Arial, sans-serif;
 $titlesFont:'Timmana', Arial, sans-serif;
@@ -90,4 +91,18 @@ a {
 
 .thumbs {
     text-align:center;
+}
+
+.carousel-item {
+    background-color:$carouselColor;
+}
+
+.carouselThumbnails {
+    padding-left:67px;
+}
+.star {
+    color:$inactiveStarsColor;
+    .star:hover {
+        color:$activeStarsColor;
+    }
 }

@@ -4,11 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Movie;
+use App\Entity\Rating;
 use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\MovieType;
 use App\Repository\CommentRepository;
 use App\Repository\MovieRepository;
+use App\Repository\RatingRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -213,5 +216,36 @@ class MovieController extends AbstractController
         }
 
         return $this->redirectToRoute('movie_index');
+    }
+
+    /**
+     * @return Response
+     * @Route("/{id}/new/rate/{value}", name="movie_new_rate", methods={"GET","POST"})
+     */
+    public function newRate(Request $request, Movie $movie, int $value, RatingRepository $ratingRepository):Response
+    {
+        $rating=new Rating();
+        $user = $this->security->getUser();
+
+        $checkRating=$ratingRepository->findBy(['movie'=>$movie->getId(), 'user_id'=>$user->getId()]);
+        if (empty($checkRating)) {
+            $rating->setMovie($movie);
+            $rating->setValue($value);
+            $rating->setUserId($user);
+
+            $this->getDoctrine()->getManager()->persist($rating);
+            $this->getDoctrine()->getManager()->flush();
+            $this->addFlash(
+                'success',
+                "Your rating has been registered !"
+            );
+        } else {
+            $this->addFlash(
+                'danger',
+                "You have already submit a rating for this movie !"
+            );
+        }
+
+        return $this->redirectToRoute('movie_show', ['id'=>$movie->getId()]);
     }
 }
