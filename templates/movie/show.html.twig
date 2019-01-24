@@ -55,8 +55,8 @@
         <p>Members comments : </p>
         {% for comment in comments %}
             <fieldset class="border p-2 my-2">
-                {{ comment.userId.username | capitalize }}
-                {{ comment.message }}
+                <b>{{ comment.userId.username | capitalize }}</b> :
+                <p>{{ comment.message }}</p>
             </fieldset>
         {% endfor %}
     </div>
