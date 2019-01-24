@@ -12,6 +12,7 @@ use App\Repository\CommentRepository;
 use App\Repository\MovieRepository;
 use App\Repository\RatingRepository;
 use App\Repository\UserRepository;
+use App\Service\CalculateAverage;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,7 +72,7 @@ class MovieController extends AbstractController
     /**
      * @Route("/{id}", name="movie_show", methods={"GET","POST"})
      */
-    public function show(Movie $movie, Request $request): Response
+    public function show(Movie $movie, Request $request, CalculateAverage $calculateAverage, RatingRepository $ratingRepository): Response
     {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
@@ -93,10 +94,13 @@ class MovieController extends AbstractController
 
         $comments=$movie->getComments();
 
+        $average=$calculateAverage->calculateAverage($movie, $ratingRepository);
+
         return $this->render('movie/show.html.twig', [
             'movie' => $movie,
             'form' => $form->createView(),
             'comments' => $comments,
+            'average' => $average,
         ]);
     }
 
@@ -227,6 +231,10 @@ class MovieController extends AbstractController
     {
         $rating=new Rating();
         $user = $this->security->getUser();
+
+        if ($user==null) {
+            return $this->redirectToRoute('app_login');
+        }
 
         if ($value<=0 || $value>5) {
             throw new Exception('Incorrect value.');

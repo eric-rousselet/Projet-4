@@ -10,13 +10,13 @@
         </div>
         <div class="col">
             <p>
-                <b>Average rating</b> : 4 / 5
+                <b>Average rating</b> : {% if average==0 %}N/A{% else %}{{ average }} / 5{% endif %}
                 <div class="stars">
-                    <a href=""><i class="fas fa-star star1 star"></i></a>
-                    <a href=""><i class="fas fa-star star2 star"></i></a>
-                    <a href=""><i class="fas fa-star star3 star"></i></a>
-                    <a href=""><i class="fas fa-star star4 star"></i></a>
-                    <a href=""><i class="fas fa-star star5 star"></i></a>
+                    <a href=""><i class="fas fa-star star1 star{% if average>=1 %} activeStar{% endif %}"></i></a>
+                    <a href=""><i class="fas fa-star star2 star{% if average>=2 %} activeStar{% endif %}"></i></a>
+                    <a href=""><i class="fas fa-star star3 star{% if average>=3 %} activeStar{% endif %}"></i></a>
+                    <a href=""><i class="fas fa-star star4 star{% if average>=4 %} activeStar{% endif %}"></i></a>
+                    <a href=""><i class="fas fa-star star5 star{% if average>=5 %} activeStar{% endif %}"></i></a>
                 </div>
             </p>
             <p>{{ movie.synopsis }}</p>
