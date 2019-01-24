@@ -169,25 +169,48 @@ class MovieController extends AbstractController
     {
         $client = new \GuzzleHttp\Client();
 
-        // https://image.tmdb.org/t/p/w300_and_h450_bestv2/jX94vnfcuJ8rTnFbsoriY6dlHrC.jpg
+        $movies=$movieRepository->findAll();
+
+        foreach ($movies as $key=>$movie) {
+            $apiId=$movie->getApiId();
+            $response = $client->get('https://api.themoviedb.org/3/movie/'.$apiId.'?api_key=b5bc52293943361515af8c82862fe832');
+            $body = $response->getBody();
+            $body = json_decode($body, true, 10);
+            $movie->setPicture('https://image.tmdb.org/t/p/w300_and_h450_bestv2'.$body['poster_path']);
+            $this->getDoctrine()->getManager()->persist($movie);
+            $this->getDoctrine()->getManager()->flush();
+            sleep( 1 );
+        }
+
+        return $this->redirectToRoute('movie_index');
+    }
+
+    /**
+     * @Route("/admin/import/directors", name="import_directors", methods={"GET"})
+     */
+    public function importDirectors(MovieRepository $movieRepository):Response
+    {
+        $client = new \GuzzleHttp\Client();
 
         $movies=$movieRepository->findAll();
 
         foreach ($movies as $key=>$movie) {
             $apiId=$movie->getApiId();
-            $request = new \GuzzleHttp\Psr7\Request('GET', 'https://api.themoviedb.org/3/movie/'.$apiId.'?api_key=b5bc52293943361515af8c82862fe832');
-            $promise = $client->sendAsync($request)->then(function ($response) {
-                $body = $response->getBody();
-                $body = json_decode($body, true, 10);
+            $response = $client->get('https://api.themoviedb.org/3/movie/'.$apiId.'/credits?api_key=b5bc52293943361515af8c82862fe832');
+            $body = $response->getBody();
+            $body = json_decode($body, true, 10);
 
-                return $body['poster_path'];
-            });
-            $promise->wait();
-            $movie->setPicture($body['poster_path']);
+            foreach ($body['crew'] as $key => $value) {
+                if ($value['job']=='Director') {
+                    $director=$value['name'];
+                }
+            }
+
+            $movie->setDirector($director);
             $this->getDoctrine()->getManager()->persist($movie);
             $this->getDoctrine()->getManager()->flush();
+            sleep( 1 );
         }
-        $promise->wait();
 
         return $this->redirectToRoute('movie_index');
     }

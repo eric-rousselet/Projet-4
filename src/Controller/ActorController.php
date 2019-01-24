@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Actor;
 use App\Form\ActorType;
 use App\Repository\ActorRepository;
+use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -95,21 +96,39 @@ class ActorController extends AbstractController
     }
 
     /**
-     * @Route("/admin/import", name="import_actors", methods={"GET"})
+     * @Route("/admin/import/actors", name="import_actors", methods={"GET"})
      */
-    public function importActors()
+    public function importActors(MovieRepository $movieRepository, ActorRepository $actorRepository):Response
     {
         $client = new \GuzzleHttp\Client();
 
-        $request = new \GuzzleHttp\Psr7\Request('GET', 'https://api.themoviedb.org/3/person/popular?api_key=b5bc52293943361515af8c82862fe832&page=25');
-        $promise = $client->sendAsync($request)->then(function ($response) {
+        $movies=$movieRepository->findAll();
+
+
+
+        /*
+        foreach ($movies as $key=>$movie) {
+            $apiId=$movie->getApiId();
+            $response = $client->get('https://api.themoviedb.org/3/movie/'.$apiId.'/credits?api_key=b5bc52293943361515af8c82862fe832');
             $body = $response->getBody();
             $body = json_decode($body, true, 10);
-            var_dump($body);
-        });
 
-        $promise->wait();
+            foreach ($body['crew'] as $key => $value) {
+                if ($value['job']=='Director') {
+                    $director=$value['name'];
+                }
+            }
 
-        die();
+            $actors=$actorRepository->findAll();
+            foreach ($actors as $key2 => $value2) {
+                $value2->addMovie()
+            }
+            $movie->setDirector($director);
+            $this->getDoctrine()->getManager()->persist($movie);
+            $this->getDoctrine()->getManager()->flush();
+            sleep( 1 );
+        }  */
+
+        return $this->redirectToRoute('actor_index');
     }
 }

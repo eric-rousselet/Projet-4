@@ -11,7 +11,7 @@
                     <td>{{ movie.synopsis }}</td>
                 </tr>
                 <tr>
-                    <td>{{ movie.picture }}</td>
+                    <td><img src="{{ movie.picture }}" /></td>
                 </tr>
                 <tr>
                     <th>Release date :</th>
@@ -55,7 +55,7 @@
         <p>Members comments : </p>
         {% for comment in comments %}
             <fieldset class="border p-2 my-2">
-
+                {{ comment.userId.username | capitalize }}
                 {{ comment.message }}
             </fieldset>
         {% endfor %}
