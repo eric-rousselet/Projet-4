@@ -4,46 +4,47 @@
 
 {% block body %}
     <h1>{{ movie.title }}</h1>
-        <table class="table">
-            <tbody>
-                <tr>
-                    <th>Synopsis :</th>
-                    <td>{{ movie.synopsis }}</td>
-                </tr>
-                <tr>
-                    <td><img src="{{ movie.picture }}" /></td>
-                </tr>
-                <tr>
-                    <th>Release date :</th>
-                    <td>{{ movie.releaseDate }}</td>
-                </tr>
-                <tr>
-                    <th>Director :</th>
-                    <td>{{ movie.director }}</td>
-                </tr>
-            </tbody>
-        </table>
-    {% if is_granted('ROLE_ADMIN') %}
-        <div class="input-group">
-            <a href="{{ path('movie_edit', {'id': movie.id}) }}"><button class="btn customButton  my-2 my-sm-2 m-2">Edit</button></a>
-            {{ include('movie/_delete_form.html.twig') }}
+    <div class="row form">
+        <div class="col">
+            <img src="{{ movie.picture }}" />
         </div>
-    {% endif %}
-    <br>
-    <p>
-        Rate this movie :
-        <div class="stars">
-            <a href=""><i class="fas fa-star star1 star"></i></a>
-            <a href=""><i class="fas fa-star star2 star"></i></a>
-            <a href=""><i class="fas fa-star star3 star"></i></a>
-            <a href=""><i class="fas fa-star star4 star"></i></a>
-            <a href=""><i class="fas fa-star star5 star"></i></a>
+        <div class="col">
+            <p>
+                <b>Average rating</b> : 4 / 5
+                <div class="stars">
+                    <a href=""><i class="fas fa-star star1 star"></i></a>
+                    <a href=""><i class="fas fa-star star2 star"></i></a>
+                    <a href=""><i class="fas fa-star star3 star"></i></a>
+                    <a href=""><i class="fas fa-star star4 star"></i></a>
+                    <a href=""><i class="fas fa-star star5 star"></i></a>
+                </div>
+            </p>
+            <p>{{ movie.synopsis }}</p>
+            <p><b>Release date</b> : {{ movie.releaseDate }}</p>
+            <p><b>Director</b> : {{ movie.director }}</p>
         </div>
-    </p>
-    <br>
+    </div>
+    <div class="row form">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="input-group">
+                <a href="{{ path('movie_edit', {'id': movie.id}) }}"><button class="btn customButton  my-2 my-sm-2 m-2">Edit</button></a>
+                {{ include('movie/_delete_form.html.twig') }}
+            </div>
+        {% endif %}
+    </div>
+    <div class="row form mt-5">
+         <b>Rate this movie</b> :
+         <div class="stars">
+             <a href=""><i class="fas fa-star star1 star"></i></a>
+             <a href=""><i class="fas fa-star star2 star"></i></a>
+             <a href=""><i class="fas fa-star star3 star"></i></a>
+             <a href=""><i class="fas fa-star star4 star"></i></a>
+             <a href=""><i class="fas fa-star star5 star"></i></a>
+         </div>
+    </div>
     {{ form_start(form, { 'attr': {'class': 'form'} }) }}
     <br>
-    {{ form_label(form.message, 'Add your comment : ') }}
+    <b>{{ form_label(form.message, 'Add your comment') }}</b> :
     <br>
     {{ form_widget(form.message, { 'attr': {'class': 'formTextarea'} }) }}
     <br>
@@ -52,7 +53,7 @@
     <br>
 
     <div class="form">
-        <p>Members comments : </p>
+        <p><b>Members comments</b> : </p>
         {% for comment in comments %}
             <fieldset class="border p-2 my-2">
                 <b>{{ comment.userId.username | capitalize }}</b> :

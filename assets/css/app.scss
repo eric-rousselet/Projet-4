@@ -76,6 +76,7 @@ a {
 }
 
 .customButton {
+    font-weight:bold;
     background-color:$buttonBackgroundColor;
     &:hover {
         background-color:lighten($buttonBackgroundColor, 20%);
